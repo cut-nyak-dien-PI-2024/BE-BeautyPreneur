@@ -6,12 +6,12 @@ module.exports = {
         const data = await User.find({});
 
         if(data?.length <= 0){
-            res.status(200).json({
+           return res.status(200).json({
               message: "Tidak ada data user"
             }); 
         }
 
-        res.status(200).json({
+       return res.status(200).json({
           message: "Data berhasil ditemukan",
           data,
         });
@@ -27,13 +27,13 @@ module.exports = {
             });
           }
 
-         res.status(200).json({
+        return res.status(200).json({
             message: "1 Data todo berhasil ditemukan",
             data: getDataById,
           });
 
         }catch(err){
-            res.status(500).json({
+           return res.status(500).json({
               message:"Terjadi kesalahan",
               error:err.message
             })
@@ -58,12 +58,12 @@ module.exports = {
 
         await newUser.save();
 
-        res.status(201).json({
+        return res.status(201).json({
           message: "data berhasil ditambahkan",
         });
 
         }catch(err){
-             res.status(500).json({ err });
+          return res.status(500).json({ err });
         }
     },
     editUserById : async (req, res) => {
@@ -80,13 +80,13 @@ module.exports = {
                 })
             }
 
-            res.status(200).json({
+            return res.status(200).json({
                 message:"data berhasil diubah",
                 data:updatedData
             })
 
         }catch(err){
-            res.status(500).json({
+            return res.status(500).json({
                 message:"terjadi kesalahan",
                 error:err.message
             })
@@ -103,12 +103,12 @@ module.exports = {
             })
           }
 
-          res.status(200).json({
+         return res.status(200).json({
             message:"data berhasil dihapus"
           })
 
         }catch(err){
-            res.status(500).json({
+           return res.status(500).json({
                 message:"terjadi kesalahan",
                 error:err.message
             })
@@ -117,7 +117,7 @@ module.exports = {
     deleteAllUser: async(req, res) => {
         await User.deleteMany({});
 
-        res.status(200).json({
+       return res.status(200).json({
             message:"semua data user telah dihapus"
         })
     }

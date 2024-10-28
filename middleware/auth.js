@@ -22,6 +22,7 @@ module.exports = {
        if(err.name === "TokenExpiredError") {
          return res.status(401).json({ message: "login ulang karena token sudah expired", err });
        }
+
        
         return res.status(401).json({ message: err });
      }

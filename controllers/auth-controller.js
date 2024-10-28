@@ -23,6 +23,8 @@ module.exports = {
         newUser.password = hash;
       }
 
+      newUser.isVerified = false;
+
       const otpData = await newUser.generateOtpCode();
 
       await newUser.save();
@@ -67,7 +69,7 @@ module.exports = {
         `,
       });
 
-      res.status(201).json({
+     return res.status(201).json({
         message:
           "akun berhasil dibuat, silahkan cek email untuk verifikasi akun",
       });
@@ -102,7 +104,7 @@ module.exports = {
         { expiresIn: "10h" }
       );
 
-      res.status(200).json({
+    return res.status(200).json({
         message: "berhasil login",
         access_token: token,
       });
@@ -115,7 +117,7 @@ module.exports = {
     if (user) {
       return res.status(200).json({ user });
     } else {
-      res.status(401).json({
+     return res.status(401).json({
         message: "user tidak ditemukan",
       });
     }
@@ -131,7 +133,7 @@ module.exports = {
       const otp_code = await OtpCode.findOne({ otp: req.body.otp });
 
       if (!otp_code) {
-        res.status(400).json({
+       return res.status(400).json({
           message: "kode otp tidak ditemukan",
         });
       }
@@ -145,7 +147,7 @@ module.exports = {
 
       const deleteOTP = await OtpCode.findByIdAndDelete(otp_code._id);
       if (!deleteOTP) {
-        res.status(404).json({
+       return res.status(404).json({
           message: "data tidak ditemukan",
         });
       }
@@ -162,7 +164,7 @@ module.exports = {
     const user = await User.findOne({ email });
 
     if (!user) {
-      res.status(400).json({
+     return res.status(400).json({
         message: "email tidak ditemukan",
       });
     }
@@ -209,7 +211,7 @@ module.exports = {
         `,
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "silahkan cek email untuk verifikasi akun",
     });
   },
@@ -225,7 +227,7 @@ module.exports = {
     const otpCode = await OtpCode.findOne({ otp });
 
     if (!otpCode) {
-      res.status(400).json({
+     return res.status(400).json({
         message: "kode otp tidak ditemukan",
       });
     }
@@ -238,7 +240,7 @@ module.exports = {
 
     await user.save();
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "berhasil ganti password",
     });
   }
