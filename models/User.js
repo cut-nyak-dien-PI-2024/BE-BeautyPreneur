@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const OtpCode = require("./Otpcode");
+const RandomString = require("randomstring");
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -35,9 +37,39 @@ const userSchema = new mongoose.Schema({
   updatedAt: {
     type: Date,
     default: Date.now,
-  }
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  EmailVerifiedAt: {
+    type: Date,
+  },
 });
 
+userSchema.method({
+  generateOtpCode: async function () {
+    const randomString = RandomString.generate({
+      length: 5,
+      charset: "numeric",
+    });
+
+    let currentDate = new Date();
+
+    const otp = await OtpCode.findOneAndUpdate({
+      'user':this._id
+    }, {
+      'otp':randomString,
+      'validUntil':currentDate.setMinutes(currentDate.getMinutes() + 5)
+    }, {
+      new:true,
+      upsert:true
+    }
+   )
+
+    return otp;
+  },
+});
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

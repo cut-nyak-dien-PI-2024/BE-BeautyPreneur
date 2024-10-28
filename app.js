@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
+const cors = require('cors');
+ 
+app.use(cors());
 
 const allRoutes = require("./routes");
 const db = require("./db");
@@ -12,6 +15,7 @@ db.then(() => {
 })
 
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(allRoutes);
 
 app.listen(PORT, () => {

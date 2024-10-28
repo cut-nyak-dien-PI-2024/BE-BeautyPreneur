@@ -54,7 +54,7 @@ module.exports = {
             const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(newUser.password, salt);
             newUser.password = hash;
-        }
+        }        
 
         await newUser.save();
 
