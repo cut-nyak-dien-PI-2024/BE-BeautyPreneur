@@ -1,4 +1,6 @@
 const MakeupBudget = require("../models/MakeupBudget");
+const { processData } = require("../utils/logicMakeupBudget");
+
 
 module.exports = {
   sendAllData: async (req, res) => {
@@ -16,6 +18,28 @@ module.exports = {
     }
   },
   getAllData: async (req, res) => {
+
+    if(req.query){
+      if(req.query.filter){
+
+           const makeupData = await processData(
+              req.query.filter
+            );
+
+          if(makeupData.length > 0) {
+
+            return res.status(200).json({
+              message: "Data berhasil ditemukan",
+              data: makeupData,
+            });
+          }
+          return res.status(200).json({
+            message: "Data tidak ditemukan",
+            data: [],
+          });
+      } 
+    }
+
     const data = await MakeupBudget.find({});
 
     if (data?.length <= 0) {
