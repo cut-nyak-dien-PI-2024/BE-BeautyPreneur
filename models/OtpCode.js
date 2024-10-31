@@ -16,5 +16,5 @@ const otpCodeSchema = new mongoose.Schema({
     }
 })
 
-const Otpcode = mongoose.model("otpcodes", otpCodeSchema);
-module.exports = Otpcode;
+const Otp = mongoose.model("otpcodes", otpCodeSchema);
+module.exports = Otp;

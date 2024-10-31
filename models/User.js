@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const Otpcode = require("./Otpcode");
+const Otp = require("./Otpcode");
 const RandomString = require("randomstring");
 
 const userSchema = new mongoose.Schema({
@@ -56,7 +56,7 @@ userSchema.method({
 
     let currentDate = new Date();
 
-    const otp = await Otpcode.findOneAndUpdate({
+    const otp = await Otp.findOneAndUpdate({
       'user':this._id
     }, {
       'otp':randomString,
