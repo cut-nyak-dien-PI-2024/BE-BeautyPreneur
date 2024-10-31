@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const Otp = require("./Otpcode");
+const Otp = require("./Otp");
 const RandomString = require("randomstring");
 
 const userSchema = new mongoose.Schema({

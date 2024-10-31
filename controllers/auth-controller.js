@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const sendEmail = require("../utils/sendEmail");
-const Otp = require("../models/Otpcode");
+const Otp = require("../models/Otp");
 
 module.exports = {
   register: async (req, res) => {
