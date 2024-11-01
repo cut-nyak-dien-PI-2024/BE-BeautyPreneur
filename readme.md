@@ -314,10 +314,11 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
     }
   ```
 
-### Update Users
+### Update User
 
 - Endpoint: PUT /users/{id}
 - Description: edit 1 data
+- Headers: Authorization: Bearer <JWT_TOKEN>
 
   Request Body :
 
@@ -355,10 +356,11 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
     }
   ```
 
-### Delete Users
+### Delete User
 
 - Endpoint: DEL /users/{id}
 - Description: delete 1 data
+- Headers: Authorization: Bearer <JWT_TOKEN>
 
   Response Body :
   - Status Code : 200
@@ -387,10 +389,11 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
     }
   ```
 
-### Delete ALL TO-DO
+### Delete ALL USER
 
 - Endpoint: DEL /users
 - Description: delete all data
+- Headers: Authorization: Bearer <JWT_TOKEN>
 
   Response Body :
   - Status Code : 200
