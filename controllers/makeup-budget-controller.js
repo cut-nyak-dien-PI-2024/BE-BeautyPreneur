@@ -120,9 +120,9 @@ module.exports = {
   deleteDataById: async (req, res) => {
     try {
       const { id } = req.params;
-      const deletedTodo = await MakeupBudget.findByIdAndDelete(id);
+      const deletedData = await MakeupBudget.findByIdAndDelete(id);
 
-      if (!deletedTodo) {
+      if (!deletedData) {
         return res.status(404).json({
           message: "data tidak ditemukan",
         });

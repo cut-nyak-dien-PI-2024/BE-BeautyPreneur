@@ -28,7 +28,7 @@ module.exports = {
           }
 
         return res.status(200).json({
-            message: "1 Data todo berhasil ditemukan",
+            message: "1 Data berhasil ditemukan",
             data: getDataById,
           });
 
@@ -95,9 +95,9 @@ module.exports = {
     deleteUserById: async(req, res) => {
         try{
           const {id} = req.params;
-          const deletedTodo = await User.findByIdAndDelete(id);
+          const deletedData = await User.findByIdAndDelete(id);
 
-          if(!deletedTodo){
+          if(!deletedData){
             return res.status(404).json({
                 message:"data tidak ditemukan"
             })
