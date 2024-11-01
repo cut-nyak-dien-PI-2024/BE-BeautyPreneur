@@ -10,13 +10,23 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
 2. [Authentication](#authentication)
     - [Register](#register)
     - [Login](#login)
+    - [Verify Email](#verify-email)
+    - [Forgot Password](#forgot-password)
+    - [Reset Password](#reset-password)
 3. [USER](#user)
     - [Create USER](#create-user)
-    - [Get USER List](#get-user-list)
+    - [Get USER List](#get-all-user)
     - [Get Single USER](#get-single-user)
     - [Update USER](#update-user)
     - [Delete USER](#delete-user)
     - [Delete All USER](#delete-all-user)
+4. [MAKEUP BUDGET](#makeup-budget)
+    - [Create Data](#create-data)
+    - [Get Data List](#get-all-data)
+    - [Get Single Data](#get-single-data)
+    - [Update Data](#update-data)
+    - [Delete Data](#delete-data)
+    - [Delete All Data](#delete-all-data)
 
 ---
 
@@ -106,7 +116,7 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
 
   ```
 
-### VerifyEmail
+### Verify Email
 
 - Endpoint: POST /auth/verify-email
 - Description: Registers a new user.
@@ -139,7 +149,7 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
 
   ```
 
-### ForgotPassword
+### Forgot Password
 
 - Endpoint: POST /auth/forgot-password
 - Description: send email to reset password and change password.
@@ -392,6 +402,163 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
 ### Delete ALL USER
 
 - Endpoint: DEL /users
+- Description: delete all data
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+       message: "Semua data berhasil dihapus"
+    }
+  ```
+
+## Makeup Budget
+
+### Get All Data
+
+- Endpoint: GET /makeup-budget
+- Description: get all data
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+          "message": "Data berhasil ditemukan",
+          "data":[]
+    }
+  ```
+
+### Create Data
+
+- Endpoint: POST /makeup-budget
+- Description: create 1 data data
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Request Body :
+
+  ```bash
+      {
+        "product_name": "",
+        "image_url": "",
+        "price": 0,
+        "product_link": ""
+      }
+  ```
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+          "message": "Data berhasil ditambahkan"
+    }
+  ```
+
+### Get Single Data
+
+- Endpoint: GET /makeup-budget/{id}
+- Description: get single data
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+       message: "1 Data berhasil ditemukan",
+       data:{}
+    }
+  ```
+
+  Error Response :
+  - Status Code : 404
+
+  ```bash
+    {
+         message: "Data tidak ditemukan"
+    }
+  ```
+
+### Update Data
+
+- Endpoint: PUT /makeup-budget/{id}
+- Description: edit 1 data
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Request Body :
+
+  ```bash
+    {
+     "product_name":""
+    }
+
+  ```
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+       message: "Data berhasil diubah",
+       data:{}
+    }
+  ```
+
+  Error Response :
+  - Status Code : 404
+
+  ```bash
+    {
+        message: "Data tidak ditemukan"
+    }
+  ```
+
+  - Status Code : 401
+
+  ```bash
+    {
+        message: "Masukkan token dlu"
+    }
+  ```
+
+### Delete Data
+
+- Endpoint: DEL /makeup-budget/{id}
+- Description: delete 1 data
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+        message: "Data berhasil dihapus"
+    }
+  ```
+
+  Error Response :
+  - Status Code : 404
+
+  ```bash
+    {
+        message: "Data tidak ditemukan"
+    }
+  ```
+
+  - Status Code : 500
+
+  ```bash
+    {
+        message: "Terjadi kesalahan saat menghapus data",
+        error:""
+    }
+  ```
+
+### Delete ALL Data
+
+- Endpoint: DEL /makeup-budget
 - Description: delete all data
 - Headers: Authorization: Bearer <JWT_TOKEN>
 
