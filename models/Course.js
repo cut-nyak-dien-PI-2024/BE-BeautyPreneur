@@ -89,7 +89,8 @@ const courseSchema = new mongoose.Schema({
 
     fee: {
         type: Number,
-        required: [true, "fee harus diisi"]
+        required: [true, "fee harus diisi"],
+        default: 0,
     },
 
     max_participants: {

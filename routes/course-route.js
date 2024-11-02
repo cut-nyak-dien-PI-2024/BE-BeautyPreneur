@@ -7,17 +7,26 @@ const {
     createCourse,
     updateCourse,
     deleteCourse,
+    createOrder,
+    getOrder,
+    createPaymentConfirmation,
 } = require('./../controllers/course-controller');
 
 // middleware aliasing
 const bearerVerify = validateToken;
 const onlyAdmin = checkRole;
 
-// routes
+// routess
+router.get('', getCourses);
 router.get('/', getCourses);
-router.post('/', bearerVerify, onlyAdmin, createCourse);
 router.get('/:slug', bearerVerify, getCourse)
+router.post('/', bearerVerify, onlyAdmin, createCourse);
 router.put('/:slug', bearerVerify, onlyAdmin, updateCourse);
 router.delete('/:slug', bearerVerify, onlyAdmin, deleteCourse);
+
+// order and payments
+router.post('/:slug/order', bearerVerify, createOrder);
+router.get("/:slug/order/:orderId", bearerVerify, getOrder);
+router.post('/:slug/order/:orderId/confirm', bearerVerify, createPaymentConfirmation);
 
 module.exports = router;
