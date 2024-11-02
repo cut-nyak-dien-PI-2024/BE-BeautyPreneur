@@ -15,7 +15,12 @@ function transformCoursesResponse(courses) {
         title: course.name,
         desc: course.description,
         level: course.level.toLowerCase(),
-        duration: {},
+        duration: {
+            date: course.start_time.toISOString().split('T')[0],
+            hour: [course.start_time.getHours(), course.start_time.getMinutes()]
+                .map(x => x < 10 ? "0" + x : x)
+                .join(":"),
+        },
         total_student: course.max_participants.toString(),
         portofolio: course.portfolio || [],
         price: course.fee.toString(),
