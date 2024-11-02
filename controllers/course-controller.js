@@ -31,6 +31,7 @@ function transformCoursesResponse(courses) {
         headline_img: course.cover_image_url,
         image_mentor: course.mentor_image_url,
         slug: course.slug,
+        id: course.slug,
     }));
 }
 
