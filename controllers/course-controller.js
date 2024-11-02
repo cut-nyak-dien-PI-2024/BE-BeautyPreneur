@@ -2,6 +2,33 @@ const Course = require("./../models/Course");
 const slugify = require('slugify');
 
 
+function resp(res, httpStatus, data) {
+    return res.status(httpStatus).json({
+        code: httpStatus,
+        status: httpStatus >= 200,
+        data: data,
+    });
+}
+
+function transformCoursesResponse(courses) {
+    return courses.map(course => ({
+        title: course.name,
+        desc: course.description,
+        level: course.level.toLowerCase(),
+        duration: {},
+        total_student: course.max_participants.toString(),
+        portofolio: course.portfolio || [],
+        price: course.fee.toString(),
+        materi: course.materials, 
+        about: course.short_description,
+        mentor: course.mentor_name,
+        location: course.city_name.toLowerCase(),
+        headline_img: course.cover_image_url,
+        image_mentor: course.mentor_image_url,
+        slug: course.slug,
+    }));
+}
+
 module.exports = {
     async getCourses(req, res) {
         try {
@@ -14,7 +41,7 @@ module.exports = {
             };
 
             const courses = await Course.getCourses(getCoursesReq);
-            return res.status(200).json(courses);
+            return resp(res, 200, transformCoursesResponse(courses));
         } catch (error) {
             return res.status(500).json({ error: error.message });
         }

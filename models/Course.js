@@ -96,6 +96,18 @@ const courseSchema = new mongoose.Schema({
         type: Number,
         required: [true, "maksimum partisipan harus diisi"]
     },
+
+    portfolio: [{
+        name: {
+            type: String,
+            required: [true, "nama proyek harus diisi"]
+        },
+        
+        image_url: {
+            type: String,
+            required: [true, "gambar harus diisi"]
+        }
+    }]
 }, { timestamp: true });
 
 courseSchema.statics.getCourses = async function({ keyword, fg_level, city_name, page = 1, perPage = 10 }) {
