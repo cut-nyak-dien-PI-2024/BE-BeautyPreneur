@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const sendEmail = require("../utils/sendEmail");
-const OtpCode = require("../models/Otpcode");
+const Otp = require("../models/Otp");
 
 module.exports = {
   register: async (req, res) => {
@@ -23,7 +23,9 @@ module.exports = {
         newUser.password = hash;
       }
 
-      const otpData = await newUser.generateOtpCode();
+      newUser.isVerified = false;
+
+      const otpData = await newUser.generateOtpcode();
 
       await newUser.save();
 
@@ -67,7 +69,7 @@ module.exports = {
         `,
       });
 
-      res.status(201).json({
+     return res.status(201).json({
         message:
           "akun berhasil dibuat, silahkan cek email untuk verifikasi akun",
       });
@@ -102,7 +104,7 @@ module.exports = {
         { expiresIn: "10h" }
       );
 
-      res.status(200).json({
+    return res.status(200).json({
         message: "berhasil login",
         access_token: token,
       });
@@ -115,7 +117,7 @@ module.exports = {
     if (user) {
       return res.status(200).json({ user });
     } else {
-      res.status(401).json({
+     return res.status(401).json({
         message: "user tidak ditemukan",
       });
     }
@@ -128,10 +130,10 @@ module.exports = {
         });
       }
 
-      const otp_code = await OtpCode.findOne({ otp: req.body.otp });
+      const otp_code = await Otp.findOne({ otp: req.body.otp });
 
       if (!otp_code) {
-        res.status(400).json({
+       return res.status(400).json({
           message: "kode otp tidak ditemukan",
         });
       }
@@ -143,9 +145,9 @@ module.exports = {
         EmailVerifiedAt: Date.now(),
       });
 
-      const deleteOTP = await OtpCode.findByIdAndDelete(otp_code._id);
+      const deleteOTP = await Otp.findByIdAndDelete(otp_code._id);
       if (!deleteOTP) {
-        res.status(404).json({
+       return res.status(404).json({
           message: "data tidak ditemukan",
         });
       }
@@ -162,12 +164,12 @@ module.exports = {
     const user = await User.findOne({ email });
 
     if (!user) {
-      res.status(400).json({
+     return res.status(400).json({
         message: "email tidak ditemukan",
       });
     }
 
-    const otpData = await user.generateOtpCode();
+    const otpData = await user.generateOtpcode();
 
     await sendEmail({
       to: user.email,
@@ -209,7 +211,7 @@ module.exports = {
         `,
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "silahkan cek email untuk verifikasi akun",
     });
   },
@@ -222,15 +224,15 @@ module.exports = {
         .json({ status: "error", message: "Password wajib diisi" });
     }
 
-    const otpCode = await OtpCode.findOne({ otp });
+    const Otpcode = await Otp.findOne({ otp });
 
-    if (!otpCode) {
-      res.status(400).json({
+    if (!Otpcode) {
+     return res.status(400).json({
         message: "kode otp tidak ditemukan",
       });
     }
 
-    const user = await User.findById({ _id: otpCode.user });
+    const user = await User.findById({ _id: Otpcode.user });
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(newpassword, salt);
@@ -238,7 +240,7 @@ module.exports = {
 
     await user.save();
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "berhasil ganti password",
     });
   }
