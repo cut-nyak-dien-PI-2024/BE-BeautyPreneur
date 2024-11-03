@@ -13,28 +13,30 @@ function resp(res, httpStatus, data) {
 }
 
 function transformCoursesResponse(courses) {
-    return courses.map(course => ({
-        title: course.name,
-        desc: course.description,
-        level: course.level.toLowerCase(),
-        duration: {
-            date: course.start_time.toISOString().split('T')[0],
-            hour: [course.start_time.getHours(), course.start_time.getMinutes()]
-                .map(x => x < 10 ? "0" + x : x)
-                .join(":"),
-        },
-        total_student: course.max_participants.toString(),
-        portofolio: course.portfolio || [],
-        price: course.fee.toString(),
-        materi: course.materials, 
-        about: course.short_description,
-        mentor: course.mentor_name,
-        location: course.city_name.toLowerCase(),
-        headline_img: course.cover_image_url,
-        image_mentor: course.mentor_image_url,
-        slug: course.slug,
-        id: course.slug,
-    }));
+    return courses.map(course => {
+        return {
+            title: course.name,
+            desc: course.description,
+            level: course.level.toLowerCase(),
+            duration: {
+                date: course.start_time.toISOString().split('T')[0],
+                hour: [course.start_time.getHours(), course.start_time.getMinutes()]
+                    .map(x => x < 10 ? "0" + x : x)
+                    .join(":"),
+            },
+            total_student: course.totalParticipants.toString(),
+            portofolio: course.portfolio || [],
+            price: course.fee.toString(),
+            materi: course.materials, 
+            about: course.short_description,
+            mentor: course.mentor_name,
+            location: course.city_name.toLowerCase(),
+            headline_img: course.cover_image_url,
+            image_mentor: course.mentor_image_url,
+            slug: course.slug,
+            id: course.slug,
+        };
+    });
 }
 
 module.exports = {
@@ -48,8 +50,19 @@ module.exports = {
                 perPage: req.query.perPage
             };
 
+
             const courses = await Course.getCourses(getCoursesReq);
-            return resp(res, 200, transformCoursesResponse(courses));
+
+            const participantsCounts = await Promise.all(courses.map(course => 
+                course.getTotalParticipants()
+            ));
+
+            const coursesWithCounts = courses.map((course, index) => ({
+                ...course.toObject(),
+                totalParticipants: participantsCounts[index],
+            }));
+
+            return resp(res, 200, transformCoursesResponse(coursesWithCounts));
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
@@ -82,7 +95,12 @@ module.exports = {
         try {
             const course = await Course.findOne({ slug: req.params.slug });
             if (!course) return res.status(404).json({ message: "kursus tidak ditemukan" });
-            return res.status(200).json(course);
+
+            const totalParticipants = await course.getTotalParticipants();
+            const courseWithParticipants = course.toObject();
+            courseWithParticipants.total_participants = totalParticipants;
+
+            return res.status(200).json(courseWithParticipants);
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
@@ -111,86 +129,4 @@ module.exports = {
             return res.status(500).json({ message: error.message });
         }
     },
-
-    async createOrder(req, res) {
-        const userID = req.payload.id;
-        const slug = req.params.slug;
-        const { quantity = 1 } = req.body;
-
-        if (!userID) {
-            return res.status(400).json({ message: "user tidak valid" });
-        }
-
-        try {
-            const course = await Course.findOne({ slug: slug }).exec();
-            if (!course) {
-                return res.status(404).json({ message: "kursus tidak ditemukan" });
-            }
-
-            const order = await Order.findOne({user: userID, course: course._id});
-            if (order){
-                return resp(res, 200, order);
-            }
-
-            const totalPrice = course.fee * quantity;
-            const newOrder = new Order({
-                course: course._id,
-                user: userID,
-                quantity,
-                totalPrice,
-                currency: course.currency,
-            });
-
-            await newOrder.save();
-            return resp(res, 201, newOrder);
-        } catch (error) {
-            console.error(error);
-            return res.status(500).json({ message: "gagal membuat order", error });
-        }
-    },
-
-    async getOrder(req, res) {
-        const { orderId } = req.params;
-
-        try {
-            const order = await Order.findById(orderId)
-                .populate('course')
-                .populate('user');
-            
-            if (!order) {
-                return res.status(404).json({ message: "Order tidak ditemukan" });
-            }
-
-            return res.status(200).json(order);
-        } catch (error) {
-            console.error(error);
-            return res.status(500).json({ message: "gagal mendapatkan order", error });
-        }
-    },
-
-    async createPaymentConfirmation(req, res) {
-        const userId = req.payload.id;
-        const { orderId } = req.params;
-        const { confirmedAmount, paymentMethod, paymentProofUrl, bankFrom, bankTo, notes } = req.body;
-
-        try {
-            const paymentConfirmation = new OrderPaymentConfirmation({
-                order: orderId,
-                user: userId,
-                confirmedAmount,
-                paymentMethod,
-                paymentProofUrl,
-                bankFrom,
-                bankTo,
-                notes
-            });
-
-            await paymentConfirmation.save();
-
-            return res.status(201).json({ message: "Berhasil melakukan konfirmasi pembayaran", paymentConfirmation });
-        } catch (error) {
-            console.error(error);
-            return res.status(500).json({ message: "gagal membuat konfirmasi pembayaran", error });
-        }
-    }
 };

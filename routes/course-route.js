@@ -7,16 +7,21 @@ const {
     createCourse,
     updateCourse,
     deleteCourse,
+
+} = require('./../controllers/course-controller');
+
+const {
     createOrder,
     getOrder,
     createPaymentConfirmation,
-} = require('./../controllers/course-controller');
+    updateOrderStatus,
+} = require('./../controllers/order-controller');
 
 // middleware aliasing
 const bearerVerify = validateToken;
 const onlyAdmin = checkRole;
 
-// routess
+// routes
 router.get('', getCourses);
 router.get('/', getCourses);
 router.get('/:slug', bearerVerify, getCourse)
@@ -24,9 +29,12 @@ router.post('/', bearerVerify, onlyAdmin, createCourse);
 router.put('/:slug', bearerVerify, onlyAdmin, updateCourse);
 router.delete('/:slug', bearerVerify, onlyAdmin, deleteCourse);
 
-// order and payments
+// orders
 router.post('/:slug/order', bearerVerify, createOrder);
-router.get("/:slug/order/:orderId", bearerVerify, getOrder);
+router.get('/:slug/order/:orderId', bearerVerify, getOrder);
+router.put('/:slug/order/:orderId/status', bearerVerify, onlyAdmin, updateOrderStatus);
+
+// payment confirmation
 router.post('/:slug/order/:orderId/confirm', bearerVerify, createPaymentConfirmation);
 
 module.exports = router;

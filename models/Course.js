@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Order = require("./Order");
 
 const [
     LEVEL_BEGINNER,
@@ -134,8 +135,22 @@ courseSchema.statics.getCourses = async function({ keyword, fg_level, city_name,
     return courses;
 };
 
-courseSchema.method({
-});
+courseSchema.methods.getTotalParticipants = async function() {
+    const id = this._id;
+    const result = await Order.aggregate([
+        {
+            $match: {
+                course: id,
+                paymentStatus: "Paid",
+            }
+        },
+        {
+            $count: 'totalParticipants'
+        }
+    ]);
+
+    return result.length > 0 ? result[0].totalParticipants : 0;
+};
 
 const Course = mongoose.model("Course", courseSchema);
 module.exports = Course;
