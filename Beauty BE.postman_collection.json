@@ -1,0 +1,480 @@
+{
+	"info": {
+		"_postman_id": "b56819ac-bbec-4083-b803-73c532c978b9",
+		"name": "Beauty BE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Kursus / Pelatihan / Courses",
+			"item": [
+				{
+					"name": "Buat Pelatihan (Admin Login Required)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjVmOGJjM2Y3Nzc1YmNlMTQyNjEwNCIsImVtYWlsIjoidGVzdDFAdGVzdC5jb20iLCJuYW1lIjoiZXhhbXBsZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMDY0MDYwOSwiZXhwIjoxNzMwNjc2NjA5fQ.2eY1ZlhecY59Gc_sSV0WnFqPvoEJEdGCpAuwDmrxBXg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Makeup Basics\",\n    \"short_description\": \"An introductory course on makeup application techniques.\",\n    \"description\": \"Learn the fundamentals of makeup application, including techniques for a natural look and more dramatic styles.\",\n    \"materials\": \"Makeup brushes, foundation, eyeshadow, lipstick\",\n    \"cover_image_url\": \"https://placehold.co/600x400?text=Makeup+Course+Cover\",\n    \"level\": \"Pemula\",\n    \"mentor_name\": \"Elsa Carroll\",\n    \"mentor_image_url\": \"https://placehold.co/100x100?text=Mentor+Image\",\n    \"city_name\": \"Jakarta\",\n    \"location_address\": \"456 Beauty Street, Jakarta\",\n    \"location_latitude\": -6.2,\n    \"location_longitude\": 106.816666,\n    \"start_time\": \"2024-01-10T10:00:00.000Z\",\n    \"end_time\": \"2024-01-10T15:00:00.000Z\",\n    \"currency\": \"IDR\",\n    \"fee\": 2250000,\n    \"max_participants\": 20,\n    \"portfolio\": [\n        {\n            \"name\": \"Bridal Makeup\",\n            \"image_url\": \"https://placehold.co/300x200?text=Bridal+Makeup\"\n        },\n        {\n            \"name\": \"Party Makeup\",\n            \"image_url\": \"https://placehold.co/300x200?text=Party+Makeup\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/courses",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Buat Pelatihan (Admin Login Required)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Makeup Basics\",\n    \"short_description\": \"An introductory course on makeup application techniques.\",\n    \"description\": \"Learn the fundamentals of makeup application, including techniques for a natural look and more dramatic styles.\",\n    \"materials\": \"Makeup brushes, foundation, eyeshadow, lipstick\",\n    \"cover_image_url\": \"https://placehold.co/600x400?text=Makeup+Course+Cover\",\n    \"level\": \"Pemula\",\n    \"mentor_name\": \"Elsa Carroll\",\n    \"mentor_image_url\": \"https://placehold.co/100x100?text=Mentor+Image\",\n    \"city_name\": \"Jakarta\",\n    \"location_address\": \"456 Beauty Street, Jakarta\",\n    \"location_latitude\": -6.2,\n    \"location_longitude\": 106.816666,\n    \"start_time\": \"2024-01-10T10:00:00.000Z\",\n    \"end_time\": \"2024-01-10T15:00:00.000Z\",\n    \"currency\": \"IDR\",\n    \"fee\": 2250000,\n    \"max_participants\": 20,\n    \"portfolio\": [\n        {\n            \"name\": \"Bridal Makeup\",\n            \"image_url\": \"https://placehold.co/300x200?text=Bridal+Makeup\"\n        },\n        {\n            \"name\": \"Party Makeup\",\n            \"image_url\": \"https://placehold.co/300x200?text=Party+Makeup\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/courses",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"courses"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "927"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"39f-ewDhizn8NgzxuQPjyLs7Zhz3xno\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Nov 2024 14:57:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"status\": true,\n    \"data\": [\n        {\n            \"title\": \"Makeup Basics\",\n            \"desc\": \"Learn the fundamentals of makeup application, including techniques for a natural look and more dramatic styles.\",\n            \"level\": \"pemula\",\n            \"duration\": {\n                \"date\": \"2024-01-10\",\n                \"hour\": \"17:00\"\n            },\n            \"total_student\": \"\",\n            \"portofolio\": [\n                {\n                    \"name\": \"Bridal Makeup\",\n                    \"image_url\": \"https://placehold.co/300x200?text=Bridal+Makeup\",\n                    \"_id\": \"67278f76d967614529ae855a\"\n                },\n                {\n                    \"name\": \"Party Makeup\",\n                    \"image_url\": \"https://placehold.co/300x200?text=Party+Makeup\",\n                    \"_id\": \"67278f76d967614529ae855b\"\n                }\n            ],\n            \"price\": \"2250000\",\n            \"materi\": \"Makeup brushes, foundation, eyeshadow, lipstick\",\n            \"about\": \"An introductory course on makeup application techniques.\",\n            \"mentor\": \"Elsa Carroll\",\n            \"location\": \"Jakarta\",\n            \"headline_img\": \"https://placehold.co/600x400?text=Makeup+Course+Cover\",\n            \"image_mentor\": \"https://placehold.co/100x100?text=Mentor+Image\",\n            \"slug\": \"makeup-basics-undefined-jakarta-1\",\n            \"id\": \"makeup-basics-undefined-jakarta-1\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List Pelatihan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/courses?q=&page=1&perPage=10&level=&cityName=",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "perPage",
+									"value": "10"
+								},
+								{
+									"key": "level",
+									"value": ""
+								},
+								{
+									"key": "cityName",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Pelatihan",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/courses?q=&page=1&perPage=10&level=&cityName=",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"courses"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": ""
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "perPage",
+											"value": "10"
+										},
+										{
+											"key": "level",
+											"value": ""
+										},
+										{
+											"key": "cityName",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "6811"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a9b-YYRF0zARwhPa4DjTFLCqIT8KvWY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Nov 2024 14:58:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"data\": [\n        {\n            \"title\": \"Digital Marketing Essentials\",\n            \"desc\": \"An introductory course covering SEO, social media, and content marketing.\",\n            \"level\": \"pemula\",\n            \"duration\": {\n                \"date\": \"2024-02-05\",\n                \"hour\": \"17:00\"\n            },\n            \"total_student\": \"\",\n            \"portofolio\": [],\n            \"price\": \"150\",\n            \"materi\": \"SEO, Social Media, Content Marketing\",\n            \"about\": \"Learn the basics of digital marketing.\",\n            \"mentor\": \"Alice Smith\",\n            \"location\": \"New York\",\n            \"headline_img\": \"https://placehold.co/600x400?text=Digital+Marketing\",\n            \"image_mentor\": \"https://placehold.co/100x100?text=Alice+Smith\",\n            \"slug\": \"digital-marketing-essentials-1-new-york\",\n            \"id\": \"digital-marketing-essentials-1-new-york\"\n        },\n        {\n            \"title\": \"Python for Data Science\",\n            \"desc\": \"A comprehensive guide to using Python for data manipulation, analysis, and visualization.\",\n            \"level\": \"pemula\",\n            \"duration\": {\n                \"date\": \"2024-03-01\",\n                \"hour\": \"16:00\"\n            },\n            \"total_student\": \"\",\n            \"portofolio\": [],\n            \"price\": \"200\",\n            \"materi\": \"Python, Pandas, Matplotlib\",\n            \"about\": \"Master Python basics for data analysis.\",\n            \"mentor\": \"Mark Lee\",\n            \"location\": \"London\",\n            \"headline_img\": \"https://placehold.co/600x400?text=Python+Data+Science\",\n            \"image_mentor\": \"https://placehold.co/100x100?text=Mark+Lee\",\n            \"slug\": \"python-for-data-science-2-london\",\n            \"id\": \"python-for-data-science-2-london\"\n        },\n        {\n            \"title\": \"Graphic Design Fundamentals\",\n            \"desc\": \"Explore Adobe Photoshop, Illustrator, and basic design principles.\",\n            \"level\": \"pemula\",\n            \"duration\": {\n                \"date\": \"2024-04-10\",\n                \"hour\": \"17:00\"\n            },\n            \"total_student\": \"\",\n            \"portofolio\": [],\n            \"price\": \"180\",\n            \"materi\": \"Photoshop, Illustrator, Design Principles\",\n            \"about\": \"Introduction to graphic design tools and concepts.\",\n            \"mentor\": \"Sophia Brown\",\n            \"location\": \"Los Angeles\",\n            \"headline_img\": \"https://placehold.co/600x400?text=Graphic+Design\",\n            \"image_mentor\": \"https://placehold.co/100x100?text=Sophia+Brown\",\n            \"slug\": \"graphic-design-fundamentals-1-los-angeles\",\n            \"id\": \"graphic-design-fundamentals-1-los-angeles\"\n        },\n        {\n            \"title\": \"Advanced Java Programming\",\n            \"desc\": \"Covers OOP, data structures, and advanced concepts in Java.\",\n            \"level\": \"pemula\",\n            \"duration\": {\n                \"date\": \"2024-05-15\",\n                \"hour\": \"16:00\"\n            },\n            \"total_student\": \"\",\n            \"portofolio\": [],\n            \"price\": \"250\",\n            \"materi\": \"Java, OOP, Data Structures\",\n            \"about\": \"A deep dive into Java programming for experienced developers.\",\n            \"mentor\": \"David Kim\",\n            \"location\": \"San Francisco\",\n            \"headline_img\": \"https://placehold.co/600x400?text=Java+Programming\",\n            \"image_mentor\": \"https://placehold.co/100x100?text=David+Kim\",\n            \"slug\": \"advanced-java-programming-3-san-francisco\",\n            \"id\": \"advanced-java-programming-3-san-francisco\"\n        },\n        {\n            \"title\": \"Intro to Blockchain Technology\",\n            \"desc\": \"A beginner-friendly introduction to blockchain, cryptocurrencies, and smart contracts.\",\n            \"level\": \"pemula\",\n            \"duration\": {\n                \"date\": \"2024-06-20\",\n                \"hour\": \"18:00\"\n            },\n            \"total_student\": \"\",\n            \"portofolio\": [],\n            \"price\": \"100\",\n            \"materi\": \"Blockchain, Cryptocurrencies, Smart Contracts\",\n            \"about\": \"Learn the foundations of blockchain and its applications.\",\n            \"mentor\": \"Emma Wilson\",\n            \"location\": \"Toronto\",\n            \"headline_img\": \"https://placehold.co/600x400?text=Blockchain+Technology\",\n            \"image_mentor\": \"https://placehold.co/100x100?text=Emma+Wilson\",\n            \"slug\": \"intro-to-blockchain-technology-1-toronto\",\n            \"id\": \"intro-to-blockchain-technology-1-toronto\"\n        },\n        {\n            \"title\": \"Project Management Basics\",\n            \"desc\": \"Learn project management frameworks, scheduling, and team collaboration.\",\n            \"level\": \"pemula\",\n            \"duration\": {\n                \"date\": \"2024-07-15\",\n                \"hour\": \"15:30\"\n            },\n            \"total_student\": \"\",\n            \"portofolio\": [],\n            \"price\": \"120\",\n            \"materi\": \"Project Management, Scheduling, Collaboration\",\n            \"about\": \"An overview of project management principles and tools.\",\n            \"mentor\": \"Olivia Taylor\",\n            \"location\": \"Chicago\",\n            \"headline_img\": \"https://placehold.co/600x400?text=Project+Management\",\n            \"image_mentor\": \"https://placehold.co/100x100?text=Olivia+Taylor\",\n            \"slug\": \"project-management-basics-1-chicago\",\n            \"id\": \"project-management-basics-1-chicago\"\n        },\n        {\n            \"title\": \"Cybersecurity Essentials\",\n            \"desc\": \"Covers network security, encryption, and best practices for data protection.\",\n            \"level\": \"pemula\",\n            \"duration\": {\n                \"date\": \"2024-08-12\",\n                \"hour\": \"16:00\"\n            },\n            \"total_student\": \"\",\n            \"portofolio\": [],\n            \"price\": \"140\",\n            \"materi\": \"Network Security, Encryption, Data Protection\",\n            \"about\": \"Learn the basics of cybersecurity and how to protect systems.\",\n            \"mentor\": \"Ethan Martinez\",\n            \"location\": \"Austin\",\n            \"headline_img\": \"https://placehold.co/600x400?text=Cybersecurity\",\n            \"image_mentor\": \"https://placehold.co/100x100?text=Ethan+Martinez\",\n            \"slug\": \"cybersecurity-essentials-2-austin\",\n            \"id\": \"cybersecurity-essentials-2-austin\"\n        },\n        {\n            \"title\": \"Mobile App Development with React Native\",\n            \"desc\": \"An intermediate course covering React Native basics and app deployment.\",\n            \"level\": \"pemula\",\n            \"duration\": {\n                \"date\": \"2024-09-05\",\n                \"hour\": \"17:00\"\n            },\n            \"total_student\": \"\",\n            \"portofolio\": [],\n            \"price\": \"200\",\n            \"materi\": \"React Native, Mobile App Development, JavaScript\",\n            \"about\": \"Learn how to build mobile apps using React Native.\",\n            \"mentor\": \"Lucas Garcia\",\n            \"location\": \"Miami\",\n            \"headline_img\": \"https://placehold.co/600x400?text=React+Native+App\",\n            \"image_mentor\": \"https://placehold.co/100x100?text=Lucas+Garcia\",\n            \"slug\": \"mobile-app-development-with-react-native-2-miami\",\n            \"id\": \"mobile-app-development-with-react-native-2-miami\"\n        },\n        {\n            \"title\": \"Makeup Basics\",\n            \"desc\": \"Learn the fundamentals of makeup application, including techniques for a natural look and more dramatic styles.\",\n            \"level\": \"pemula\",\n            \"duration\": {\n                \"date\": \"2024-01-10\",\n                \"hour\": \"17:00\"\n            },\n            \"total_student\": \"\",\n            \"portofolio\": [\n                {\n                    \"name\": \"Bridal Makeup\",\n                    \"image_url\": \"https://placehold.co/300x200?text=Bridal+Makeup\",\n                    \"_id\": \"67278f6a3b86c0c438e72e41\"\n                },\n                {\n                    \"name\": \"Party Makeup\",\n                    \"image_url\": \"https://placehold.co/300x200?text=Party+Makeup\",\n                    \"_id\": \"67278f6a3b86c0c438e72e42\"\n                }\n            ],\n            \"price\": \"2250000\",\n            \"materi\": \"Makeup brushes, foundation, eyeshadow, lipstick\",\n            \"about\": \"An introductory course on makeup application techniques.\",\n            \"mentor\": \"Elsa Carroll\",\n            \"location\": \"Jakarta\",\n            \"headline_img\": \"https://placehold.co/600x400?text=Makeup+Course+Cover\",\n            \"image_mentor\": \"https://placehold.co/100x100?text=Mentor+Image\",\n            \"slug\": \"makeup-basics-undefined-jakarta\",\n            \"id\": \"makeup-basics-undefined-jakarta\"\n        },\n        {\n            \"title\": \"Makeup Basics\",\n            \"desc\": \"Learn the fundamentals of makeup application, including techniques for a natural look and more dramatic styles.\",\n            \"level\": \"pemula\",\n            \"duration\": {\n                \"date\": \"2024-01-10\",\n                \"hour\": \"17:00\"\n            },\n            \"total_student\": \"\",\n            \"portofolio\": [\n                {\n                    \"name\": \"Bridal Makeup\",\n                    \"image_url\": \"https://placehold.co/300x200?text=Bridal+Makeup\",\n                    \"_id\": \"67278f76d967614529ae855a\"\n                },\n                {\n                    \"name\": \"Party Makeup\",\n                    \"image_url\": \"https://placehold.co/300x200?text=Party+Makeup\",\n                    \"_id\": \"67278f76d967614529ae855b\"\n                }\n            ],\n            \"price\": \"2250000\",\n            \"materi\": \"Makeup brushes, foundation, eyeshadow, lipstick\",\n            \"about\": \"An introductory course on makeup application techniques.\",\n            \"mentor\": \"Elsa Carroll\",\n            \"location\": \"Jakarta\",\n            \"headline_img\": \"https://placehold.co/600x400?text=Makeup+Course+Cover\",\n            \"image_mentor\": \"https://placehold.co/100x100?text=Mentor+Image\",\n            \"slug\": \"makeup-basics-undefined-jakarta-1\",\n            \"id\": \"makeup-basics-undefined-jakarta-1\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Pelatihan (Login Required)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjVmOGJjM2Y3Nzc1YmNlMTQyNjEwNCIsImVtYWlsIjoidGVzdDFAdGVzdC5jb20iLCJuYW1lIjoiZXhhbXBsZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMDY0MDYwOSwiZXhwIjoxNzMwNjc2NjA5fQ.2eY1ZlhecY59Gc_sSV0WnFqPvoEJEdGCpAuwDmrxBXg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/courses/digital-marketing-essentials-1-new-york",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"courses",
+								"digital-marketing-essentials-1-new-york"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Pelatihan (Admin Login Required)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjVmOGJjM2Y3Nzc1YmNlMTQyNjEwNCIsImVtYWlsIjoidGVzdDFAdGVzdC5jb20iLCJuYW1lIjoiZXhhbXBsZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMDY0MDYwOSwiZXhwIjoxNzMwNjc2NjA5fQ.2eY1ZlhecY59Gc_sSV0WnFqPvoEJEdGCpAuwDmrxBXg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/courses/makeup-basics-undefined-jakarta-1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"courses",
+								"makeup-basics-undefined-jakarta-1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Pelatihan (Admin Login Required)",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/courses/makeup-basics-undefined-jakarta-1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"courses",
+										"makeup-basics-undefined-jakarta-1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-9UcqocFZpxpHjvCmiucubHB2yqw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Nov 2024 14:58:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"kursus berhasil dihapus\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Orders / Payments",
+			"item": [
+				{
+					"name": "Buat Order (Login Required)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjVmOGJjM2Y3Nzc1YmNlMTQyNjEwNCIsImVtYWlsIjoidGVzdDFAdGVzdC5jb20iLCJuYW1lIjoiZXhhbXBsZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMDY0MDYwOSwiZXhwIjoxNzMwNjc2NjA5fQ.2eY1ZlhecY59Gc_sSV0WnFqPvoEJEdGCpAuwDmrxBXg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"quantity\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/courses/digital-marketing-essentials-1-new-york/order",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"courses",
+								"digital-marketing-essentials-1-new-york",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Konfirmasi Pembayaran (Login Required)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjVmOGJjM2Y3Nzc1YmNlMTQyNjEwNCIsImVtYWlsIjoidGVzdDFAdGVzdC5jb20iLCJuYW1lIjoiZXhhbXBsZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMDY0MDYwOSwiZXhwIjoxNzMwNjc2NjA5fQ.2eY1ZlhecY59Gc_sSV0WnFqPvoEJEdGCpAuwDmrxBXg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"confirmedAmount\": 150,\n    \"bankFrom\": \"BCA\",\n    \"bankTo\": \"Mandiri\",\n    \"notes\": \"sudah di trasnfer ya atas nama xyz\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/courses/digital-marketing-essentials-1-new-york/order/67264f34115167ab595d4086/confirm",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"courses",
+								"digital-marketing-essentials-1-new-york",
+								"order",
+								"67264f34115167ab595d4086",
+								"confirm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Payment Status (Admin Login Required)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjVmOGJjM2Y3Nzc1YmNlMTQyNjEwNCIsImVtYWlsIjoidGVzdDFAdGVzdC5jb20iLCJuYW1lIjoiZXhhbXBsZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMDY0MDYwOSwiZXhwIjoxNzMwNjc2NjA5fQ.2eY1ZlhecY59Gc_sSV0WnFqPvoEJEdGCpAuwDmrxBXg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"paid\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/courses/digital-marketing-essentials-1-new-york/order/67264f34115167ab595d4086/status",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"courses",
+								"digital-marketing-essentials-1-new-york",
+								"order",
+								"67264f34115167ab595d4086",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
