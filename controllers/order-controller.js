@@ -1,5 +1,6 @@
 const Order = require("./../models/Order");
 const OrderPaymentConfirmation = require("./../models/OrderPaymentConfirmation");
+const { transformCourseResponse, transformCoursesResponse } =  require("./../utils/transformCourse");
 
 module.exports = {
     async getOrders(req, res) {
@@ -13,7 +14,7 @@ module.exports = {
             const orders = await Order.find({ user: userID })
                 .populate('course')
                 .exec();
-
+                
             return res.status(200).json({ orders });
         } catch (error) {
             return res.status(500).json({ message: "gagal memuat orders" });

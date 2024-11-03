@@ -2,6 +2,7 @@ const Course = require("./../models/Course");
 const Order = require("./../models/Order");
 const OrderPaymentConfirmation = require("./../models/OrderPaymentConfirmation");
 const slugify = require('slugify');
+const { transformCourseResponse, transformCoursesResponse } =  require("./../utils/transformCourse");
 
 
 function resp(res, httpStatus, data) {
@@ -9,33 +10,6 @@ function resp(res, httpStatus, data) {
         code: httpStatus,
         status: httpStatus >= 200,
         data: data || {}
-    });
-}
-
-function transformCoursesResponse(courses) {
-    return courses.map(course => {
-        return {
-            title: course.name,
-            desc: course.description,
-            level: course.level.toLowerCase(),
-            duration: {
-                date: course.start_time.toISOString().split('T')[0],
-                hour: [course.start_time.getHours(), course.start_time.getMinutes()]
-                    .map(x => x < 10 ? "0" + x : x)
-                    .join(":"),
-            },
-            total_student: course.totalParticipants.toString(),
-            portofolio: course.portfolio || [],
-            price: course.fee.toString(),
-            materi: course.materials, 
-            about: course.short_description,
-            mentor: course.mentor_name,
-            location: course.city_name.toLowerCase(),
-            headline_img: course.cover_image_url,
-            image_mentor: course.mentor_image_url,
-            slug: course.slug,
-            id: course.slug,
-        };
     });
 }
 
@@ -49,7 +23,6 @@ module.exports = {
                 page: req.query.page,
                 perPage: req.query.perPage
             };
-
 
             const courses = await Course.getCourses(getCoursesReq);
 
@@ -85,7 +58,7 @@ module.exports = {
             const course = new Course(courseData);
             await course.save();
 
-            return resp(res, 201, course, '');
+            return resp(res, 201, transformCoursesResponse([course]), '');
         } catch (error) {
             return res.status(400).json({ message: error.message });
         }
@@ -98,9 +71,9 @@ module.exports = {
 
             const totalParticipants = await course.getTotalParticipants();
             const courseWithParticipants = course.toObject();
-            courseWithParticipants.total_participants = totalParticipants;
+            courseWithParticipants.totalParticipants = totalParticipants;
 
-            return res.status(200).json(courseWithParticipants);
+            return res.status(200).json(transformCourseResponse(courseWithParticipants));
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
@@ -114,7 +87,7 @@ module.exports = {
                 { new: true, runValidators: true }
             );
             if (!updatedCourse) return res.status(404).json({ message: "kursus tidak ditemukan" });
-            return res.status(200).json(updatedCourse);
+            return res.status(200).json(transformCourseResponse(updatedCourse));
         } catch (error) {
             return res.status(400).json({ message: error.message });
         }
