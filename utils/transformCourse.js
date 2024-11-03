@@ -29,7 +29,16 @@ function transformCourseResponse(course) {
     };
 }
 
+function resp(res, httpStatus, data) {
+    return res.status(httpStatus).json({
+        code: httpStatus,
+        status: httpStatus >= 200,
+        data: data || {}
+    });
+}
+
 module.exports = {
     transformCourseResponse,
     transformCoursesResponse,
+    resp,
 }

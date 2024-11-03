@@ -1,6 +1,7 @@
 const Order = require("./../models/Order");
 const OrderPaymentConfirmation = require("./../models/OrderPaymentConfirmation");
-const { transformCourseResponse, transformCoursesResponse } =  require("./../utils/transformCourse");
+const Course = require("./../models/Course");
+const { resp } =  require("./../utils/transformCourse");
 
 module.exports = {
     async getOrders(req, res) {
@@ -88,6 +89,11 @@ module.exports = {
         const { confirmedAmount, paymentMethod, paymentProofUrl, bankFrom, bankTo, notes } = req.body;
 
         try {
+            const orderConfirmation = await OrderPaymentConfirmation.findOne({order: orderId, user: userId});
+            if (orderConfirmation) {
+                return res.status(201).json({ message: "berhasil melakukan konfirmasi pembayaran", orderConfirmation });
+            }
+
             const paymentConfirmation = new OrderPaymentConfirmation({
                 order: orderId,
                 user: userId,

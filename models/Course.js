@@ -112,10 +112,10 @@ const courseSchema = new mongoose.Schema({
     }]
 }, { timestamp: true });
 
-courseSchema.statics.getCourses = async function({ keyword, fg_level, city_name, page = 1, perPage = 10 }) {
+courseSchema.statics.getCourses = async function({ keyword, level, city_name, page = 1, perPage = 10 }) {
     const query = {};
     
-    if (fg_level) query.fg_level = fg_level;
+    if (level) query.level = level;
     if (city_name) query.city_name = city_name;
     if (keyword && keyword.length >= 2) {
         query.$or = [

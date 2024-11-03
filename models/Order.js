@@ -4,7 +4,7 @@ const [
     PAYMENT_STATUS_PENDING,
     PAYMENT_STATUS_PAID,
     PAYMENT_STATUS_CANCELLED,
-] = ["Pending", "Paid", "Cancelled"];
+] = ["pending", "paid", "cancelled"];
 
 const orderSchema = new mongoose.Schema({
     course: {
@@ -62,7 +62,7 @@ const orderSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 orderSchema.methods.updatePaymentStatus = async function(status) {
-    this.paymentStatus = status;
+    this.paymentStatus = status.toLowerCase();
     const now = new Date();
 
     switch (status) {

@@ -2,23 +2,16 @@ const Course = require("./../models/Course");
 const Order = require("./../models/Order");
 const OrderPaymentConfirmation = require("./../models/OrderPaymentConfirmation");
 const slugify = require('slugify');
-const { transformCourseResponse, transformCoursesResponse } =  require("./../utils/transformCourse");
+const { transformCourseResponse, transformCoursesResponse, resp } =  require("./../utils/transformCourse");
 
 
-function resp(res, httpStatus, data) {
-    return res.status(httpStatus).json({
-        code: httpStatus,
-        status: httpStatus >= 200,
-        data: data || {}
-    });
-}
 
 module.exports = {
     async getCourses(req, res) {
         try {
             const getCoursesReq = {
                 keyword: req.query.q,
-                fg_level: req.query.fgLevel,
+                level: req.query.level,
                 city_name: req.query.cityName,
                 page: req.query.page,
                 perPage: req.query.perPage
