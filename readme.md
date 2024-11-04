@@ -1,6 +1,6 @@
 # Beauty Preneur API
 
-This is a RESTful API built with **Node.js** and **Express.js**. Authentication is handled using **JWT (JSON Web Tokens)**.
+This is a RESTful API for beautypreneur website built with **Node.js** and **Express.js**. Authentication is handled using **JWT (JSON Web Tokens)**. there are 25 endpoints.
 
 ---
 
@@ -15,6 +15,7 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
     - [Reset Password](#reset-password)
 3. [USER](#user)
     - [Create USER](#create-user)
+    - [Get Current User](#get-current-user)
     - [Get USER List](#get-all-user)
     - [Get Single USER](#get-single-user)
     - [Update USER](#update-user)
@@ -279,6 +280,30 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
     {
           "message": "Data berhasil ditemukan",
           "data":[]
+    }
+  ```
+
+### Get Current User
+
+- Endpoint: GET /auth/currentUser
+- Description: get all data users
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+          "user":{}
+    }
+  ```
+
+  - Status Code : 401
+
+  ```bash
+    {
+        message: "login ulang karena token sudah expired"
+        err:{}
     }
   ```
 
