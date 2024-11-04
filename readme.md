@@ -1,6 +1,6 @@
 # Beauty Preneur API
 
-This is a RESTful API for beautypreneur website built with **Node.js** and **Express.js**. Authentication is handled using **JWT (JSON Web Tokens)**. there are 25 endpoints.
+This is a RESTful API for beautypreneur website built with **Node.js** and **Express.js**. Authentication is handled using **JWT (JSON Web Tokens)**. there are 25 endpoints. Link ERD :  https://app.eraser.io/workspace/PZsy1H1EMTLIsINWZ7df
 
 ---
 
