@@ -43,7 +43,16 @@ module.exports = {
             }
 
             const order = await Order.findOne({user: userID, course: course._id});
-            if (order){
+            const orderConfirmation = await OrderPaymentConfirmation.findOne({order: order._id, user: userID});
+            if (orderConfirmation) {
+                return res.status(400).json({ message: "order anda sedang dalam proses konfirmasi admin atau sudah terbayar"});
+            }
+
+            if (order) {
+                if (order.paymentStatus == 'paid'){
+                    return res.status(400).json({ mesage: "anda telah melakukan order dan order anda sudah terbayar."});
+                }
+
                 return resp(res, 200, order);
             }
 
@@ -85,13 +94,22 @@ module.exports = {
 
     async createPaymentConfirmation(req, res) {
         const userId = req.payload.id;
-        const { orderId } = req.params;
+        const orderId = req.params.orderId;
+        const slug = req.params.slug;
+        
         const { confirmedAmount, paymentMethod, paymentProofUrl, bankFrom, bankTo, notes } = req.body;
 
         try {
-            const orderConfirmation = await OrderPaymentConfirmation.findOne({order: orderId, user: userId});
+            const orderConfirmation = await OrderPaymentConfirmation.findOne({order: orderId, user: userId})
+                .populate('order');
+                
             if (orderConfirmation) {
-                return res.status(201).json({ message: "berhasil melakukan konfirmasi pembayaran", orderConfirmation });
+                let message = "anda sudah melakukan konfirmasi pembayaran, mohon menunggu admin melakukan konfirmasi.";
+                if (orderConfirmation.order.paymentStatus == 'paid') {
+                    message = "order anda sudah terkonfirmasi dengan status paid";
+                };
+
+                return res.status(400).json({ message, orderConfirmation });
             }
 
             const paymentConfirmation = new OrderPaymentConfirmation({
