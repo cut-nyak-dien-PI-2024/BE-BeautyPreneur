@@ -36,9 +36,9 @@ module.exports = {
 
     async createCourse(req, res) {
         try {
-            const { name, fg_level, city_name } = req.body;
+            const { name, level, city_name } = req.body;
 
-            let baseSlug = slugify(`${name}-${fg_level}-${city_name}`, { lower: true });
+            let baseSlug = slugify(`${name}-${level}-${city_name}`, { lower: true });
             let uniqueSlug = baseSlug;
             let counter = 1;
 
