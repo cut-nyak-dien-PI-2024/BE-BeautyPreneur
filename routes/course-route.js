@@ -24,7 +24,7 @@ const onlyAdmin = checkRole;
 // routes
 router.get('', getCourses);
 router.get('/', getCourses);
-router.get('/:slug', bearerVerify, getCourse)
+router.get('/:slug', getCourse)
 router.post('/', bearerVerify, onlyAdmin, createCourse);
 router.put('/:slug', bearerVerify, onlyAdmin, updateCourse);
 router.delete('/:slug', bearerVerify, onlyAdmin, deleteCourse);
