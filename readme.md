@@ -1,6 +1,6 @@
 # Beauty Preneur API
 
-This is a RESTful API built with **Node.js** and **Express.js**. Authentication is handled using **JWT (JSON Web Tokens)**.
+This is a RESTful API for beautypreneur website built with **Node.js** and **Express.js**. Authentication is handled using **JWT (JSON Web Tokens)**. there are 25 endpoints. Link ERD :  https://app.eraser.io/workspace/PZsy1H1EMTLIsINWZ7df
 
 ---
 
@@ -15,6 +15,7 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
     - [Reset Password](#reset-password)
 3. [USER](#user)
     - [Create USER](#create-user)
+    - [Get Current User](#get-current-user)
     - [Get USER List](#get-all-user)
     - [Get Single USER](#get-single-user)
     - [Update USER](#update-user)
@@ -27,6 +28,15 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
     - [Update Data](#update-data)
     - [Delete Data](#delete-data)
     - [Delete All Data](#delete-all-data)
+5. [COURSES](#courses)
+    - [Create Course (Admin Login Required)](#create-course)
+    - [Get Data List Courses](#get-all-course)
+    - [Get Single Data Course (Login Required)](#get-single-course)
+    - [Delete Data(Admin Login Required)](#delete-course)
+6. [Order](#orders)
+    - [Create Order (Login Required)](#create-order)
+    - [Confirmation Payment (Login Required)](#confirmation-order)
+    - [Update Payment Status (Admin Login Required)](#update-payment)
 
 ---
 
@@ -270,6 +280,30 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
     {
           "message": "Data berhasil ditemukan",
           "data":[]
+    }
+  ```
+
+### Get Current User
+
+- Endpoint: GET /auth/currentUser
+- Description: get all data users
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+          "user":{}
+    }
+  ```
+
+  - Status Code : 401
+
+  ```bash
+    {
+        message: "login ulang karena token sudah expired"
+        err:{}
     }
   ```
 
@@ -569,4 +603,205 @@ This is a RESTful API built with **Node.js** and **Express.js**. Authentication 
     {
        message: "Semua data berhasil dihapus"
     }
+  ```
+
+## Courses
+
+### Get All Course
+
+- Endpoint: GET /courses?q=&page=1&perPage=10&level=&cityName
+- Description: get all courses
+
+  Request Body :
+
+  ```bash
+       "query": [
+        {
+         "key": "q",
+         "value": ""
+        },
+        {
+         "key": "page",
+         "value": "1"
+        },
+        {
+         "key": "perPage",
+         "value": "10"
+        },
+        {
+         "key": "level",
+         "value": ""
+        },
+        {
+         "key": "cityName",
+         "value": ""
+        }
+       ]
+  ```
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+          "message": "Data berhasil ditemukan",
+          "data":[]
+    }
+  ```
+
+### Create Course
+
+- Endpoint: POST /courses
+- Description: create 1 data course
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Request Body :
+
+  ```bash
+      {
+        "name": "Makeup Basics",
+        "short_description": "An introductory course on makeup application techniques",
+        "description": "Learn the fundamentals of makeup application, including techniques for a natural look and more dramatic styles",
+        "materials":"Makeup brushes, foundation, eyeshadow, lipstick",
+        "cover_image_url": "https://placehold.co/600x400?text=Makeup+Course+Cover",
+        "level":"Pemula",
+        "mentor_name":"Elsa Carroll",
+        "mentor_image_url":"https://placehold.co/100x100?text=Mentor+Image",
+        "city_name":"Jakarta",
+        "location_address":"456 Beauty Street, Jakarta",
+        "location_latitude":"-6.2",
+        "location_longitude":" 106.816666",
+        "start_time":"2024-01-10T10:00:00.000Z",
+        "end_time":"2024-01-10T15:00:00.000Z",
+        "currency":"IDR",
+        "fee":"2250000",
+        "max_participants":"20",
+        "portfolio":[
+          {
+            "name":"Bridal Makeup",
+            "image_url":"https://placehold.co/300x200?text=Bridal+Makeup"
+          },
+             {
+            "name":"Party Makeup",
+            "image_url":"https://placehold.co/300x200?text=Party+Makeup"
+          },
+        ]
+      }
+  ```
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+          "message": "Data berhasil ditambahkan"
+    }
+  ```
+
+### Get Single Course
+
+- Endpoint: GET /courses/${slug}
+- Description: get single data
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+       message: "1 Data berhasil ditemukan",
+       data:{}
+    }
+  ```
+
+  Error Response :
+  - Status Code : 404
+
+  ```bash
+    {
+         message: "Data tidak ditemukan"
+    }
+  ```
+  
+### Delete Course
+
+- Endpoint: DEL /courses/${slug}
+- Description: delete 1 data
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+        message: "Data berhasil dihapus"
+    }
+  ```
+
+  Error Response :
+  - Status Code : 404
+
+  ```bash
+    {
+        message: "Data tidak ditemukan"
+    }
+  ```
+
+  - Status Code : 500
+
+  ```bash
+    {
+        message: "Terjadi kesalahan saat menghapus data",
+        error:""
+    }
+  ```
+
+## Orders
+
+### Create Order
+
+- Endpoint: POST /courses
+- Description: create 1 data order
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+          "message": "Data berhasil ditambahkan"
+    }
+  ```
+
+### Confirmation Order
+
+- Endpoint: PUT courses/digital-marketing-essentials-1-new-york/order/67264f34115167ab595d4086/confirm
+- Description: confirmation order
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Request Body :
+
+  ```bash
+    {
+        "confirmedAmount":"",
+        "bankFrom":"BCA",
+        "bankTo":"Mandiri",
+        "notes":"sudah di trasnfer ya atas nama xyz"
+      }
+  ```
+
+### Update Payment
+
+- Endpoint: PUT courses/digital-marketing-essentials-1-new-york/order/67264f34115167ab595d4086/status
+- Description: update payment
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Request Body :
+
+  ```bash
+    {
+        "confirmedAmount":"",
+        "bankFrom":"BCA",
+        "bankTo":"Mandiri",
+        "notes":"sudah di trasnfer ya atas nama xyz"
+      }
   ```
