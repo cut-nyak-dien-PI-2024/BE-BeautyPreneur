@@ -28,12 +28,20 @@ This is a RESTful API for beautypreneur website built with **Node.js** and **Exp
     - [Update Data](#update-data)
     - [Delete Data](#delete-data)
     - [Delete All Data](#delete-all-data)
-5. [COURSES](#courses)
+5. [MAKEUP PACKAGE](#makeup-package)
+    - [Create Data](#create-data-package)
+    - [Get Product Makeup Data](#get-product-makeup-package)
+    - [Get Data List](#get-all-data-package)
+    - [Get Single Data](#get-single-data-package)
+    - [Update Data](#update-data-package)
+    - [Delete Data](#delete-data-package)
+    - [Delete All Data](#delete-all-data-package)
+6. [COURSES](#courses)
     - [Create Course (Admin Login Required)](#create-course)
     - [Get Data List Courses](#get-all-course)
     - [Get Single Data Course (Login Required)](#get-single-course)
     - [Delete Data(Admin Login Required)](#delete-course)
-6. [Order](#orders)
+7. [Order](#orders)
     - [Create Order (Login Required)](#create-order)
     - [Confirmation Payment (Login Required)](#confirmation-order)
     - [Update Payment Status (Admin Login Required)](#update-payment)
@@ -604,6 +612,188 @@ This is a RESTful API for beautypreneur website built with **Node.js** and **Exp
        message: "Semua data berhasil dihapus"
     }
   ```
+
+## Makeup Package
+
+### Get All Data Package
+
+- Endpoint: GET /makeup-package
+- Description: get all data
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+          "message": "Data berhasil ditemukan",
+          "data":[]
+    }
+  ```
+
+### Get Product Makeup Package
+
+- Endpoint: GET /makeup-package/get-product-makeup-package
+- Description: get all data
+
+  Request Body :
+
+  ```bash
+  {
+    data:[]
+  }
+  ```
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+          "message": "Data berhasil ditemukan",
+          "data":[]
+    }
+  ```
+
+### Create Data Package
+
+- Endpoint: POST /makeup-package
+- Description: create 1 data data
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Request Body :
+
+  ```bash
+      {
+         “name": "Paket Glow Up Sehari hari",
+          "image_url": "https://i.imgur.com/F1gdue3.jpg",
+          "total_price": 453325,
+          "total_products": 5,
+          "data": []
+      }
+  ```
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+          "message": "Data berhasil ditambahkan"
+    }
+  ```
+
+### Get Single Data Package
+
+- Endpoint: GET /makeup-package/{id}
+- Description: get single data
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+       message: "1 Data berhasil ditemukan",
+       data:{}
+    }
+  ```
+
+  Error Response :
+  - Status Code : 404
+
+  ```bash
+    {
+         message: "Data tidak ditemukan"
+    }
+  ```
+
+### Update Data Package
+
+- Endpoint: PUT /makeup-package/{id}
+- Description: edit 1 data
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Request Body :
+
+  ```bash
+    {
+     "product_name":""
+    }
+
+  ```
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+       message: "Data berhasil diubah",
+       data:{}
+    }
+  ```
+
+  Error Response :
+  - Status Code : 404
+
+  ```bash
+    {
+        message: "Data tidak ditemukan"
+    }
+  ```
+
+  - Status Code : 401
+
+  ```bash
+    {
+        message: "Masukkan token dlu"
+    }
+  ```
+
+### Delete Data Package
+
+- Endpoint: DEL /makeup-package/{id}
+- Description: delete 1 data
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+        message: "Data berhasil dihapus"
+    }
+  ```
+
+  Error Response :
+  - Status Code : 404
+
+  ```bash
+    {
+        message: "Data tidak ditemukan"
+    }
+  ```
+
+  - Status Code : 500
+
+  ```bash
+    {
+        message: "Terjadi kesalahan saat menghapus data",
+        error:""
+    }
+  ```
+
+### Delete ALL Data Package
+
+- Endpoint: DEL /makeup-package
+- Description: delete all data
+- Headers: Authorization: Bearer <JWT_TOKEN>
+
+  Response Body :
+  - Status Code : 200
+
+  ```bash
+    {
+       message: "Semua data berhasil dihapus"
+    }
+  ```
+
 
 ## Courses
 
