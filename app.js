@@ -19,5 +19,5 @@ app.use(express.urlencoded({extended:true}));
 app.use(allRoutes);
 
 app.listen(PORT, () => {
-    console.log("server running on PORT" + 3000);
+    console.log("server running on PORT" + PORT);
 })

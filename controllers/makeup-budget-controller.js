@@ -7,37 +7,32 @@ module.exports = {
     try {
       const allData = req.body;
 
-     const result = await MakeupBudget.insertMany(allData);
+      const result = await MakeupBudget.insertMany(allData);
 
       return res.status(201).json({
         message: "data berhasil ditambahkan",
-        data:result
+        data: result,
       });
     } catch (err) {
       return res.status(500).json({ err });
     }
   },
   getAllData: async (req, res) => {
+    if (req.query) {
+      if (req.query.filter) {
+        const makeupData = await processData(req.query.filter);
 
-    if(req.query){
-      if(req.query.filter){
-
-           const makeupData = await processData(
-              req.query.filter
-            );
-
-          if(makeupData.length > 0) {
-
-            return res.status(200).json({
-              message: "Data berhasil ditemukan",
-              data: makeupData,
-            });
-          }
+        if (makeupData.length > 0) {
           return res.status(200).json({
-            message: "Data tidak ditemukan",
-            data: [],
+            message: "Data berhasil ditemukan",
+            data: makeupData,
           });
-      } 
+        }
+        return res.status(200).json({
+          message: "Data tidak ditemukan",
+          data: [],
+        });
+      }
     }
 
     const data = await MakeupBudget.find({});
