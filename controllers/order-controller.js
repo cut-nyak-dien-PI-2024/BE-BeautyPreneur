@@ -42,7 +42,6 @@ module.exports = {
                 return res.status(400).json({ message: "tidak dapat membuat order, partisipan telah terpenuhi"})
             }
 
-            console.log(course);
             const order = await Order.findOne({user: userID, course: course._id});
             if (order) {
                 if (order.paymentStatus == 'paid'){
