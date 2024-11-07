@@ -42,15 +42,16 @@ module.exports = {
                 return res.status(400).json({ message: "tidak dapat membuat order, partisipan telah terpenuhi"})
             }
 
+            console.log(course);
             const order = await Order.findOne({user: userID, course: course._id});
-            const orderConfirmation = await OrderPaymentConfirmation.findOne({order: order._id, user: userID});
-            if (orderConfirmation) {
-                return res.status(400).json({ message: "order anda sedang dalam proses konfirmasi admin atau sudah terbayar"});
-            }
-
             if (order) {
                 if (order.paymentStatus == 'paid'){
                     return res.status(400).json({ mesage: "anda telah melakukan order dan order anda sudah terbayar."});
+                }
+        
+                const orderConfirmation = await OrderPaymentConfirmation.findOne({order: order._id, user: userID});
+                if (orderConfirmation) {
+                    return res.status(400).json({ message: "order anda sedang dalam proses konfirmasi admin atau sudah terbayar"});
                 }
 
                 return resp(res, 200, order);
