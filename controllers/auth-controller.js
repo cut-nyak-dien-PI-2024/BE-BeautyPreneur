@@ -212,7 +212,8 @@ module.exports = {
     });
 
     return res.status(200).json({
-      message: "silahkan cek email untuk verifikasi akun",
+      message:
+        "Permintaan penggantian kata sandi telah diterima. Silakan periksa email Anda untuk kode OTP yang diperlukan.",
     });
   },
   resetPassword: async (req, res) => {
